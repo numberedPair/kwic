@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class RequiredWordsTest {
 
     @Test
-    public void testIsWordIgnored() throws Exception {
+    public void testIsWordRequired() throws Exception {
         RequiredWords requiredWords = RequiredWords.getRequiredWords();
 
         // Empty List
