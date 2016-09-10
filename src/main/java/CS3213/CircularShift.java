@@ -75,6 +75,10 @@ public class CircularShift {
     }
     
     private String[] getShiftsWithRequiredWord(String[] shifts) {
+    	if(hasRequiredWords()){
+    		return shifts;
+    	}
+    	
         List<String> shiftList = new ArrayList<String>(Arrays.asList(shifts));
 
         Iterator<String> iter = shiftList.iterator();
@@ -89,6 +93,10 @@ public class CircularShift {
 
     private boolean isShiftStartingWithIgnoredWord(String line) {
         return this._wordsToIgnore.isWordIgnored(line.split(DELIMITER)[0]);
+    }
+    
+    private boolean hasRequiredWords(){
+    	return !this._requiredWords.isEmpty();
     }
     
     private boolean isShiftStartingWithRequiredWord(String line){

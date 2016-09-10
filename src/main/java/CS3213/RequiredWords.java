@@ -31,4 +31,8 @@ public class RequiredWords {
 	        assert(word != null);
 	        return this._requiredWords.contains(word);
 	    }
+	    
+	    public boolean isEmpty(){
+	    	return !this._requiredWords.isEmpty();
+	    }
 }
