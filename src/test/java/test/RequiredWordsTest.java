@@ -27,8 +27,8 @@ public class RequiredWordsTest {
 
         requiredWords.addRequiredWord("of"); // add duplicated word
         requiredWords.addRequiredWord("after");
-        assertTrue(requiredWords.removeRequiredWord("the"));
-        assertTrue(requiredWords.removeRequiredWord(""));
+        requiredWords.removeRequiredWord("the");
+        requiredWords.removeRequiredWord("");
         assertFalse(requiredWords.isWordRequired("the"));
         assertTrue(requiredWords.isWordRequired("of"));
         assertFalse(requiredWords.isWordRequired(""));
