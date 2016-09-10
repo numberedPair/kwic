@@ -1,5 +1,7 @@
 package test;
 import CS3213.RequiredWords;
+import CS3213.WordsToIgnore;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,25 +12,39 @@ public class RequiredWordsTest {
     public void testIsWordIgnored() throws Exception {
         RequiredWords requiredWords = RequiredWords.getRequiredWords();
 
-        assertFalse(requiredWords.isWordIgnored("the"));
+        // Empty List
+        assertFalse(requiredWords.isWordRequired("the"));
 
-        requiredWords.addRequiredWord("the");
-        requiredWords.addRequiredWord("of");
-        requiredWords.addRequiredWord("");
+        // Standard Add and Check
+        assertTrue(requiredWords.addRequiredWord("the"));
+        assertTrue(requiredWords.addRequiredWord("of"));
+        assertTrue(requiredWords.addRequiredWord(""));
         assertTrue(requiredWords.isWordRequired("the"));
         assertTrue(requiredWords.isWordRequired("of"));
         assertTrue(requiredWords.isWordRequired(""));
         assertFalse(requiredWords.isWordRequired("after"));
         assertFalse(requiredWords.isWordRequired("before"));
 
-        requiredWords.addRequiredWord("of"); // add duplicated word
-        requiredWords.addRequiredWord("after");
-        requiredWords.removeRequiredWord("the");
-        requiredWords.removeRequiredWord("");
+        assertTrue(requiredWords.addRequiredWord("of")); // add duplicated word
+        assertTrue(requiredWords.addRequiredWord("after"));
+        assertTrue(requiredWords.removeRequiredWord("the"));
+        assertTrue(requiredWords.removeRequiredWord(""));
         assertFalse(requiredWords.isWordRequired("the"));
         assertTrue(requiredWords.isWordRequired("of"));
         assertFalse(requiredWords.isWordRequired(""));
         assertTrue(requiredWords.isWordRequired("after"));
         assertFalse(requiredWords.isWordRequired("before"));
+        
+        // Test with WordsToIgnore
+        WordsToIgnore wordsToIgnore = WordsToIgnore.getWordsToIgnore();
+        RequiredWords requiredWordsTwo = RequiredWords.getRequiredWords();
+        
+        wordsToIgnore.addWordToIgnore("the");
+        wordsToIgnore.addWordToIgnore("of");
+        assertFalse(requiredWordsTwo.addRequiredWord("the"));
+        assertFalse(requiredWordsTwo.addRequiredWord("of"));
+        assertTrue(requiredWordsTwo.addRequiredWord("something"));
+        assertFalse(requiredWords.isWordRequired("the"));
+        assertTrue(requiredWords.isWordRequired("something"));
     }
 }
