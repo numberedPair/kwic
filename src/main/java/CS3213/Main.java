@@ -28,6 +28,19 @@ public class Main {
             wordsToIgnore.addWordToIgnore(inputWordToIgnore);
             inputWordToIgnore = sc.nextLine();
         }
+        
+        System.out.println("Enter required words (terminate input by entering empty line) ");
+        String inputRequiredWords = sc.nextLine();
+        RequiredWords requiredWords = RequiredWords.getRequiredWords();
+        while (!inputRequiredWords.isEmpty()) {
+            //wordsToIgnore.addWordToIgnore(inputWordToIgnore);
+        	if(wordsToIgnore.isWordIgnored(inputRequiredWords)){
+        		System.out.println("Cannot be a required word as it is already a word to ignore");
+        	}else{
+        		requiredWords.addRequiredWord(inputRequiredWords);
+        	}
+        	inputRequiredWords = sc.nextLine();
+        }
 
         Alphabetizer alphabetizer = new Alphabetizer();
         for (String str : inputs) {
